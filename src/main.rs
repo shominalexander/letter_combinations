@@ -1,10 +1,9 @@
 fn multiply (vector_1: Vec<String>, vector_2: Vec<String>) -> Vec<String> {
- let mut product: Vec<String> = vec![]       ;
- let mut text   :     String  = String::new();
+ let mut product: Vec<String> = vec![];
 
  for element_1 in vector_1.iter() {
   for element_2 in vector_2.iter() {
-   text = element_1.to_owned() + element_2;
+   let text = element_1.to_owned() + element_2;
 
    product.push(text);
   }//for element_2 in vector_2.iter() {
@@ -12,6 +11,18 @@ fn multiply (vector_1: Vec<String>, vector_2: Vec<String>) -> Vec<String> {
 
  product
 }//fn multiply (vector_1: Vec<String>, vector_2: Vec<String>) -> Vec<String> {
+
+fn request() -> String {
+ let mut value: String = String::new();
+
+ std::io::stdin().read_line(&mut value).expect("Input failed");
+
+ value = value.trim().to_string();
+ value = value.replace("\n", "") ;
+ value = value.replace("\r", "") ;
+
+ value
+}//fn request() -> String {
 
 fn variants (text: String) -> Vec<String> {
  let mut chars  : std::str::Chars = text.chars()   ;
@@ -65,14 +76,9 @@ fn variants (text: String) -> Vec<String> {
 
 fn main(){
  loop {
-  let mut digits: String = String::new();
-
   println!("\r\n\r\ndigits:"); 
 
-  std::io::stdin().read_line(&mut digits).expect("Input failed");
-
-  digits = digits.replace("\n", "");
-  digits = digits.replace("\r", "");
+  let digits: String = request();
 
   if &digits[..] == "exit" {
    break;   
